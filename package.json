@@ -3,8 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"engines": {
-		"node": "18.19.0",
-		"npm": "9.2.0"
+		"node": "20.14.0",
+		"npm": "10.7.0"
 	},
 	"scripts": {
 		"start": "node index.js",
@@ -15,6 +15,7 @@
 	"description": "",
 	"dependencies": {
 		"express": "^4.19.2",
+		"mongodb": "^6.8.0",
 		"nodemon": "^3.1.4",
 		"passport": "^0.7.0",
 		"passport-google-oauth20": "^2.0.0"
