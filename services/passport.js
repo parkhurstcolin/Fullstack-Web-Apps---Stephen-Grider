@@ -16,9 +16,12 @@ passport.use(
 			User.findOne({ googleId: profile.id }).then((existingUser) => {
 				if (existingUser) {
 					//We already have a record with the given ID
+					done(null, existingUser);
 				} else {
 					//We don't have a user record with this ID, so make a new record
-					new User({ googleId: profile.id }).save();
+					new User({ googleId: profile.id })
+						.save()
+						.then((user) => done(null, user));
 				}
 			});
 		}
