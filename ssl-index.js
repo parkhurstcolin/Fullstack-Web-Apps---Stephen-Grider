@@ -2,9 +2,9 @@ const fs = require("fs");
 const http = require("http");
 const https = require("https");
 const express = require("express");
-
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
+
 const passport = require("passport");
 const keys = require("./config/keys");
 require("./models/User");
@@ -14,10 +14,11 @@ mongoose.connect(keys.mongoURI);
 
 const httpsOptions = {
 	cert: fs.readFileSync("~/certs/xyServer.crt"),
-	ca: fs.copyFileSync("~/certs/xyServer.ca-bundle"),
+	ca: fs.copyFileSync("~/certs/xyCorp-RootCA.crt"),
 	key: fs.readFileSync("~/certs/xyServer.key"),
 };
 
+const hostname = "emaily.xyz";
 const app = express();
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(httpsOptions, app);
@@ -40,8 +41,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/authRoutes")(app);
-
-// const sslOptions = https.createServer({}, app);
 
 httpServer.listen(httpPort, hostname);
 httpsServer.listen(httpsPort, hostname);
