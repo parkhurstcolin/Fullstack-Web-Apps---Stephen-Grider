@@ -13,9 +13,9 @@ require("./services/passport");
 mongoose.connect(keys.mongoURI);
 
 const httpsOptions = {
-	cert: fs.readFileSync("./certs/xyServer"),
-	ca: fs.readFileSync("./certs/xyCorp-RootCA"),
-	key: fs.readFileSync("./certs/xyServer"),
+	cert: fs.readFileSync("./certs/xyServer.crt"),
+	ca: fs.readFileSync("./certs/xyCorp-RootCA.crt"),
+	key: fs.readFileSync("./certs/xyServer.key"),
 };
 
 const hostname = "emaily.xyz";
