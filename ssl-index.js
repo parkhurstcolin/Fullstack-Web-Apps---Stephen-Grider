@@ -14,7 +14,7 @@ mongoose.connect(keys.mongoURI);
 
 const httpsOptions = {
 	cert: fs.readFileSync("./certs/xyServer.crt"),
-	ca: fs.copyFileSync("./certs/xyCorp-RootCA.crt"),
+	ca: fs.readFileSync("./certs/xyCorp-RootCA.crt"),
 	key: fs.readFileSync("./certs/xyServer.key"),
 };
 
