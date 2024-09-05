@@ -18,7 +18,7 @@ const httpsOptions = {
 	key: fs.readFileSync("./certs/xyServer.key"),
 };
 
-const hostname = "emaily.xyz";
+const hostname = "emaily.xyz:5000";
 const app = express();
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(httpsOptions, app);
@@ -42,5 +42,5 @@ app.use(passport.session());
 
 require("./routes/authRoutes")(app);
 
-httpServer.listen(httpPort, hostname);
-httpsServer.listen(httpsPort, hostname);
+httpServer.listen(80, hostname);
+httpsServer.listen(443, hostname);
