@@ -13,31 +13,7 @@ require("./services/passport");
 
 mongoose.connect(keys.mongoURI);
 
-//Declare location for server certificates
-if (process.env.NODE_ENV === "production") {
-	const httpsOptions = {
-		cert: fs.readFileSync("./certs/xyServer.crt"),
-		ca: fs.readFileSync("./certs/xyCorp-RootCA.crt"),
-		key: fs.readFileSync("./certs/xyServer.key"),
-	};
-	const hostname = "emaily.xyz";
-}
-
 const app = express();
-
-//Create server for http
-if (process.env.NODE_ENV === "production") {
-	const httpServer = http.createServer(app);
-	const httpsServer = https.createServer(httpsOptions, app);
-
-	//Redirect from http to https
-	app.use((req, res, next) => {
-		if (req.protocol === "http") {
-			res.redirect(301, `https://${req.headers.host}${req.url}`);
-		}
-		next();
-	});
-}
 
 //Length for cookies
 app.use(
@@ -52,8 +28,28 @@ app.use(passport.session());
 
 require("./routes/authRoutes")(app);
 
-//Listening on ports 80 & 443
+//Declare location for server certificates
 if (process.env.NODE_ENV === "production") {
+	const httpsOptions = {
+		cert: fs.readFileSync("./certs/xyServer.crt"),
+		ca: fs.readFileSync("./certs/xyCorp-RootCA.crt"),
+		key: fs.readFileSync("./certs/xyServer.key"),
+	};
+	const hostname = "emaily.xyz";
+
+	//Create server for http
+	const httpServer = http.createServer(app);
+	const httpsServer = https.createServer(httpsOptions, app);
+
+	//Redirect from http to https
+	app.use((req, res, next) => {
+		if (req.protocol === "http") {
+			res.redirect(301, `https://${req.headers.host}${req.url}`);
+		}
+		next();
+	});
+
+	//Listening on ports 80 & 443
 	httpServer.listen(80, hostname);
 	httpsServer.listen(443, hostname);
 } else {
