@@ -20,9 +20,12 @@ const httpsOptions = {
 
 const hostname = "emaily.xyz";
 const app = express();
+
+//Create server for http
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(httpsOptions, app);
 
+//Redirect from http to https
 app.use((req, res, next) => {
 	if (req.protocol === "http") {
 		res.redirect(301, `https://${req.headers.host}${req.url}`);
