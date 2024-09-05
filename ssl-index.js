@@ -18,7 +18,7 @@ const httpsOptions = {
 	key: fs.readFileSync("./certs/xyServer.key"),
 };
 
-const hostname = "emaily.xyz:5000";
+const hostname = "emaily.xyz";
 const app = express();
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(httpsOptions, app);
