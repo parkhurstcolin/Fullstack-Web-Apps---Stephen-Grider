@@ -31,9 +31,9 @@ require("./routes/authRoutes")(app);
 //Declare location for server certificates
 if (process.env.NODE_ENV === "production") {
 	const httpsOptions = {
-		cert: keys.cert,
-		ca: keys.ca,
-		key: keys.key,
+		cert: fs.readFileSync(keys.cert),
+		ca: fs.readFileSync(keys.ca),
+		key: fs.readFileSync(keys.key),
 	};
 	const hostname = "emaily.xyz";
 
