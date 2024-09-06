@@ -6,6 +6,6 @@ module.exports = {
 	cookieKey: process.env.COOKIE_KEY,
 	cert: process.env.WEB_CERT,
 	ca: process.env.CA_CERT,
-	webkey: process.env.WEB_KEY,
+	key: process.env.WEB_KEY,
 };
 
