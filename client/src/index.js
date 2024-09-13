@@ -2,8 +2,14 @@
 import React from "react";
 import ReactDom from "react-dom/client";
 
+//import React-Redux & createStore
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware} from 'redux';
+
 //Import App component as usual
 import App from "./Components/App";
+
+const store = createStore(() => [], {}, applyMiddleware());
 
 //Get a reference to the div with ID root
 const el = document.getElementById("root");
@@ -12,4 +18,8 @@ const el = document.getElementById("root");
 const root = ReactDom.createRoot(el);
 
 //Render the component
-root.render(<App />);
+root.render(
+	<Provider store={store}>
+		<App />
+	</Provider>
+);
