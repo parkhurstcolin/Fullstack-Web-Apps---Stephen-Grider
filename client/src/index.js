@@ -9,7 +9,8 @@ import { createStore, applyMiddleware} from 'redux';
 //Import App component as usual
 import App from "./Components/App";
 
-const store = createStore(() => [], {}, applyMiddleware());
+import reducers from "./Reducers";
+const store = createStore(reducers, {}, applyMiddleware());
 
 //Get a reference to the div with ID root
 const el = document.getElementById("root");
