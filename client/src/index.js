@@ -9,11 +9,14 @@ import ReactDom from "react-dom/client";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
-//Import App component as usual
-import App from "./Components/App";
+//import reduxThunk
+import reduxThunk from 'redux-thunk';
 
-import reducers from "./Reducers";
-const store = createStore(reducers, {}, applyMiddleware());
+//Import App component as usual
+import App from "./components/App";
+
+import reducers from "./reducers";
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 //Get a reference to the div with ID root
 const el = document.getElementById("root");
