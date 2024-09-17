@@ -10,13 +10,13 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
 //import reduxThunk
-import reduxThunk from 'redux-thunk';
+import { thunk } from "redux-thunk";
 
 //Import App component as usual
 import App from "./components/App";
 
 import reducers from "./reducers";
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(reducers, {}, applyMiddleware(thunk));
 
 //Get a reference to the div with ID root
 const el = document.getElementById("root");
