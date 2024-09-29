@@ -39,6 +39,7 @@ if (process.env.NODE_ENV === "production") {
 		key: fs.readFileSync(keys.key),
 	};
 	const hostname = "emaily.xyz";
+	const path = require("path");
 
 	//Create server for http
 	const httpServer = http.createServer(app);
@@ -49,7 +50,12 @@ if (process.env.NODE_ENV === "production") {
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
+		express.static("client/build");
 		next();
+	});
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
 	//Listening on ports 80 & 443
