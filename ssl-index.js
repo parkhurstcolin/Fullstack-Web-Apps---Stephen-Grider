@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === "production") {
 	const httpsServer = https.createServer(httpsOptions, app);
 
 	//Redirect from http to https
-	app.use((req, res, next) => {
+	app.get((req, res, next) => {
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
