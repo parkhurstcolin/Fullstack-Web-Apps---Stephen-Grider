@@ -57,9 +57,9 @@ if (process.env.NODE_ENV === "production") {
 	//Listening on ports 80 & 443
 	httpServer.listen(80, hostname);
 	httpsServer.listen(443, hostname);
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-	});
+	// app.get("*", (req, res) => {
+	// 	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+	// });
 } else {
 	//Dev environment
 	const PORT = process.env.PORT || 5000;
