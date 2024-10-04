@@ -46,12 +46,18 @@ if (process.env.NODE_ENV === "production") {
 	const httpsServer = https.createServer(httpsOptions, app);
 
 	//Redirect from http to https
-	app.get("*", (req, res, next) => {
+	app.set("*", (req, res, next) => {
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
-		//express.static("client/build");
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+		express.static("client/build");
+
+		// Express will serve up the index.html file
+		// if it doesn't recognize the route
+
+		app.get("*", (req, res) => {
+			res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+		});
 		next();
 	});
 
