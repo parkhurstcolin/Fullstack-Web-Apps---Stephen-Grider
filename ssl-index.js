@@ -33,11 +33,14 @@ require("./routes/billingRoutes")(app);
 
 //Declare location for server certificates
 if (process.env.NODE_ENV === "production") {
+	app.use(express.static("client/build"));
+
 	const httpsOptions = {
 		cert: fs.readFileSync(keys.cert),
 		ca: fs.readFileSync(keys.ca),
 		key: fs.readFileSync(keys.key),
 	};
+
 	const hostname = "emaily.xyz";
 	const path = require("path");
 
@@ -46,18 +49,16 @@ if (process.env.NODE_ENV === "production") {
 	const httpsServer = https.createServer(httpsOptions, app);
 
 	//Redirect from http to https
-	app.set("*", (req, res, next) => {
+	app.set((req, res, next) => {
 		console.log(req.url);
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
-
-		// Express will serve up the index.html file
-		// if it doesn't recognize the route
-		express.static("client/build");
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-
 		next();
+	});
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
 	//Listening on ports 80 & 443
