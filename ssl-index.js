@@ -50,8 +50,8 @@ if (process.env.NODE_ENV === "production") {
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
-		express.static("client/build");
-		//res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+		//express.static("client/build");
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 		next();
 	});
 
