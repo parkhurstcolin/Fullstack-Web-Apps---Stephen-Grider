@@ -48,6 +48,8 @@ if (process.env.NODE_ENV === "production") {
 	//Redirect from http to https
 	app.get("*", (req, res, next) => {
 		if (req.protocol === "http") {
+			console.log("here");
+			console.log(req.headers.host);
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
 		//express.static("client/build");
