@@ -47,13 +47,11 @@ if (process.env.NODE_ENV === "production") {
 
 	//Redirect from http to https
 	app.get("*", (req, res, next) => {
-		console.log("here");
-		console.log(req.headers.host);
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
-		//express.static("client/build");
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+		express.static("client/build");
+		//res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 		next();
 	});
 
