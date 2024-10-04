@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === "production") {
 		ca: fs.readFileSync(keys.ca),
 		key: fs.readFileSync(keys.key),
 	};
-	const hostname = "192.100.40.80";
+	const hostname = "emaily.xyz";
 	const path = require("path");
 
 	//Create server for http
