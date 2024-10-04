@@ -1,17 +1,14 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
-
-if (process.env.NODE_ENV == "production") {
-	module.exports = function (app) {
+module.exports = function (app) {
+	if (process.env.NODE_ENV === "production") {
 		app.use(
 			["/api", "/auth/google"],
 
 			createProxyMiddleware({
-				target: "http://localhost",
+				target: "https://localhost",
 			})
 		);
-	};
-} else {
-	module.exports = function (app) {
+	} else {
 		app.use(
 			["/api", "/auth/google"],
 
@@ -19,5 +16,5 @@ if (process.env.NODE_ENV == "production") {
 				target: "http://localhost:5000",
 			})
 		);
-	};
-}
+	}
+};
