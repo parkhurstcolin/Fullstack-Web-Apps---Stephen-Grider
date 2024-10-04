@@ -4,7 +4,7 @@ module.exports = function (app) {
 	app.use(
 		["/api/*", "/auth/google"],
 		createProxyMiddleware({
-			target: "https://localhost:5000",
+			target: "http://emaily.xyz:5000",
 		})
 	);
 };
