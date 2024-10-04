@@ -46,20 +46,19 @@ if (process.env.NODE_ENV === "production") {
 	const httpsServer = https.createServer(httpsOptions, app);
 
 	//Redirect from http to https
-	app.get((req, res, next) => {
+	app.get("*", (req, res, next) => {
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
-		express.static("client/build");
+		//express.static("client/build");
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 		next();
 	});
 
 	//Listening on ports 80 & 443
 	httpServer.listen(80, hostname);
 	httpsServer.listen(443, hostname);
-	// app.get("*", (req, res) => {
-	// 	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-	// });
+
 } else {
 	//Dev environment
 	const PORT = process.env.PORT || 5000;
