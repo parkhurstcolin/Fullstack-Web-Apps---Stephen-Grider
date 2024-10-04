@@ -58,9 +58,8 @@ if (process.env.NODE_ENV === "production") {
 	//Listening on ports 80 & 443
 	httpServer.listen(80, hostname);
 	httpsServer.listen(443, hostname);
-
-} else {
+}
 	//Dev environment
 	const PORT = process.env.PORT || 5000;
 	app.listen(PORT);
-}
+
