@@ -24,7 +24,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"server": "HTTPS=true SSL_CRT_FILE=process.env.SSL_CRT_FILE SSL_KEY_FILE=process.env.SSL_KEY_FILE react-scripts start"
+		"server": "HTTPS=true SSL_CRT_FILE=../certs/xyServer.crt SSL_KEY_FILE=../certs/xyServer.key react-scripts start"
 	},
 	"eslintConfig": {
 		"extends": [
