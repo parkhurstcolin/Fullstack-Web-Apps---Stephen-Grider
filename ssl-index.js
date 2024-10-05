@@ -41,7 +41,6 @@ if (process.env.NODE_ENV === "production") {
 		key: fs.readFileSync(keys.key),
 	};
 
-	const hostname = "emaily.xyz";
 	const path = require("path");
 
 	//Create server for http
@@ -51,7 +50,6 @@ if (process.env.NODE_ENV === "production") {
 		res.end();
 	});
 
-	//Redirect from http to https
 	app.set("*", (req, res) => {
 		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
