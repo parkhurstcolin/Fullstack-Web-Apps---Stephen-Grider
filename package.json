@@ -10,8 +10,9 @@
 		"start": "nodemon index.js",
 		"server": "nodemon ssl-index.js",
 		"client": "npm run start --prefix client",
+		"clientprod": "npm run start HTTPS=true SSL_CRT_FILE=process.env.SSL_CRT_FILE SSL_KEY_FILE=process.env.SSL_KEY_FILE --prefix client",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
-		"prod": "concurrently \"npm run server\" \"HTTPS=true npm run client\""
+		"prod": "concurrently \"npm run server\" \"npm run clientprod\""
 	},
 	"author": "",
 	"license": "ISC",

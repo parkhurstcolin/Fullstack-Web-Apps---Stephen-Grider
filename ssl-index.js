@@ -54,10 +54,10 @@ if (process.env.NODE_ENV === "production") {
 	//	});
 
 	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 		if (req.protocol === "http") {
 			res.redirect(301, `https://${req.headers.host}${req.url}`);
 		}
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
 	//Listening on ports 80 & 443
