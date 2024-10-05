@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === "production") {
 	const path = require("path");
 
 	//Create server for http
-	const httpServer = http.createServer((req, req) => {
+	const httpServer = http.createServer((req, res) => {
 		res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
 		res.end();
 	});
