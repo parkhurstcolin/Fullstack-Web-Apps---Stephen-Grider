@@ -45,22 +45,14 @@ if (process.env.NODE_ENV === "production") {
 	const path = require("path");
 
 	//Create server for http
+	const httpsServer = https.createServer(httpsOptions, app);
 	const httpServer = http.createServer((req, res) => {
 		res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
 		res.end();
 	});
 
-	const httpsServer = https.createServer(httpsOptions, app);
-
 	//Redirect from http to https
-	//	app.set((req, res, next) => {
-	//		next();
-	//	});
-
 	app.set("*", (req, res) => {
-		//	if (req.protocol === "http") {
-		//		res.redirect(301, `https://${req.headers.host}${req.url}`);
-		//	}
 		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
@@ -68,7 +60,7 @@ if (process.env.NODE_ENV === "production") {
 	httpServer.listen(80);
 	httpsServer.listen(443);
 }
-	//Dev environment
-	const PORT = process.env.PORT || 5000;
-	app.listen(PORT);
+//Dev environment
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
 
