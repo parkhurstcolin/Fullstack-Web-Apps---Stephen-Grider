@@ -46,23 +46,23 @@ if (process.env.NODE_ENV === "production") {
 
 	//Create server for http
 	const httpServer = http.createServer(app);
-	//const httpsServer = https.createServer(httpsOptions, app);
+	const httpsServer = https.createServer(httpsOptions, app);
 
 	//Redirect from http to https
 	//	app.set((req, res, next) => {
 	//		next();
 	//	});
 
-	app.get("*", (req, res) => {
-		//if (req.protocol === "http") {
-		//	res.redirect(301, `https://${req.headers.host}${req.url}`);
-		//}
+	app.set("*", (req, res) => {
+		//	if (req.protocol === "http") {
+		//		res.redirect(301, `https://${req.headers.host}${req.url}`);
+		//	}
 		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
 	//Listening on ports 80 & 443
 	httpServer.listen(80, hostname);
-	//httpsServer.listen(443, hostname);
+	httpsServer.listen(443, hostname);
 }
 	//Dev environment
 	const PORT = process.env.PORT || 5000;
