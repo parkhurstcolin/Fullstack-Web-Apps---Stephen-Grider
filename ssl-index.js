@@ -47,6 +47,7 @@ if (process.env.NODE_ENV === "production") {
 	const httpsServer = https.createServer(httpsOptions, app);
 	const httpServer = http.createServer((req, res) => {
 		res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
+		res.end();
 	});
 
 	app.set("*", (req, res) => {
