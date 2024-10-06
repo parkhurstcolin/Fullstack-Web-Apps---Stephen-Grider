@@ -49,9 +49,9 @@ if (process.env.NODE_ENV === "production") {
 
 	//Create server for http
 	const httpsServer = https.createServer(httpsOptions, app);
-	const httpServer = http.createServer((req, res) => {
+	const httpServer = http.createServer((req, res, next) => {
 		res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
-		res.end();
+		next();
 	});
 
 	app.set("*", (req, res) => {
@@ -59,6 +59,6 @@ if (process.env.NODE_ENV === "production") {
 	});
 
 	//Listening on ports 80 & 443
-	httpServer.listen(80);
 	httpsServer.listen(443);
+	httpServer.listen(80);
 }
