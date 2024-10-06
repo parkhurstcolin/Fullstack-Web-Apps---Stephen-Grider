@@ -12,7 +12,7 @@ class Header extends Component {
 			case false:
 				return (
 					<li>
-						<a href={`${process.env.REACT_APP_ROUTE}/auth/google`}>
+						<a href={`http://${process.env.REACT_APP_ROUTE}:5000/auth/google`}>
 							Login with Google!
 						</a>
 					</li>
@@ -26,7 +26,9 @@ class Header extends Component {
 						Credits: {this.props.auth.credits}
 					</li>,
 					<li key="3">
-						<a href={`${process.env.REACT_APP_ROUTE}/api/logout`}>Logout</a>
+						<a href={`http://${process.env.REACT_APP_ROUTE}:5000/api/logout`}>
+							Logout
+						</a>
 					</li>,
 				];
 		}
