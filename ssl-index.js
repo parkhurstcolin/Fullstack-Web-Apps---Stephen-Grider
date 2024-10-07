@@ -31,31 +31,25 @@ app.use(passport.session());
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
 
-//Dev environment
-const PORT = process.env.PORT || 5000;
-const httpServer = http.createServer(app);
-
 //Declare location for server certificates
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static("client/build"));
-
+	const path = require("path");
 	const httpsOptions = {
 		cert: fs.readFileSync(keys.cert),
 		ca: fs.readFileSync(keys.ca),
 		key: fs.readFileSync(keys.key),
 	};
 
-	const path = require("path");
-
-	//Create server for http
-	const httpsServer = https.createServer(httpsOptions, app);
-
-	app.set("*", (req, res) => {
+	app.use(express.static("client/build"));
+	app.get("*", (req, res) => {
 		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
-	//Listening on ports 80 & 443
+	const httpsServer = https.createServer(httpsOptions, app);
 	httpsServer.listen(443);
 }
 
+//Development Environment
+const PORT = process.env.PORT || 5000;
+const httpServer = http.createServer(app);
 httpServer.listen(PORT);
