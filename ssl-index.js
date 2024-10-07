@@ -33,7 +33,7 @@ require("./routes/billingRoutes")(app);
 
 //Dev environment
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+const httpServer = http.createServer(app);
 
 //Declare location for server certificates
 if (process.env.NODE_ENV === "production") {
@@ -49,10 +49,6 @@ if (process.env.NODE_ENV === "production") {
 
 	//Create server for http
 	const httpsServer = https.createServer(httpsOptions, app);
-	const httpServer = http.createServer((req, res, next) => {
-		res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
-		next();
-	});
 
 	app.set("*", (req, res) => {
 		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
@@ -60,5 +56,6 @@ if (process.env.NODE_ENV === "production") {
 
 	//Listening on ports 80 & 443
 	httpsServer.listen(443);
-	httpServer.listen(80);
 }
+
+httpServer.listen(PORT);
