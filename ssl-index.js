@@ -1,6 +1,6 @@
-const fs = require("fs");
+//const fs = require("fs");
 const http = require("http");
-const https = require("https");
+//const https = require("https");
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -34,19 +34,19 @@ require("./routes/billingRoutes")(app);
 //Declare location for server certificates
 if (process.env.NODE_ENV === "production") {
 	const path = require("path");
-	const httpsOptions = {
-		cert: fs.readFileSync(keys.cert),
-		ca: fs.readFileSync(keys.ca),
-		key: fs.readFileSync(keys.key),
-	};
+	//const httpsOptions = {
+	//	cert: fs.readFileSync(keys.cert),
+	//	ca: fs.readFileSync(keys.ca),
+	//	key: fs.readFileSync(keys.key),
+	//};
 
 	app.use(express.static("client/build"));
 	app.get("*", (req, res) => {
 		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 
-	const httpsServer = https.createServer(httpsOptions, app);
-	httpsServer.listen(443);
+	//const httpsServer = https.createServer(httpsOptions, app);
+	//httpsServer.listen(443);
 }
 
 //Development Environment
