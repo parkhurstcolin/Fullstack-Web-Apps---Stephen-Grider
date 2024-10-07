@@ -8,10 +8,8 @@
 	},
 	"scripts": {
 		"start": "nodemon index.js",
-		"server": "nodemon ssl-index.js",
 		"client": "npm run start --prefix client",
-		"dev": "concurrently \"npm run start\" \"npm run client\"",
-		"prod": "concurrently \"npm run server\" \"npm run client\""
+		"dev": "concurrently \"npm run start\" \"npm run client\""
 	},
 	"author": "",
 	"license": "ISC",
