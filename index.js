@@ -36,6 +36,7 @@ app.use(passport.session());
 //API Routes
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 //SSL Certificates & Production Environment
 if (process.env.NODE_ENV === "production") {
