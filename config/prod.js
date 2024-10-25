@@ -5,7 +5,8 @@ module.exports = {
 	googleRedirectURI: process.env.GOOGLE_REDIRECT_URI,
 	mongoURI: process.env.MONGO_URI,
 	cookieKey: process.env.COOKIE_KEY,
-	sendGridKey: process.env.SENDGRIDKEY,
+	sendGridKey: process.env.SENDGRID_KEY,
+	redirectDomain: process.env.REDIRECT_DOMAIN,
 
 	//Server Keys
 	cert: process.env.WEB_CERT,
