@@ -12,7 +12,7 @@ module.exports = (app) => {
 	});
 
 	app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
-		const { to, from, header, body, subject } = req.body;
+		const { to, from, header, subject, text } = req.body;
 
 		const survey = new Survey({
 			to: to.split(",").map((email) => ({
@@ -20,8 +20,8 @@ module.exports = (app) => {
 			})),
 			from,
 			header,
-			body,
 			subject,
+			text,
 			_user: req.user.id,
 			dateSent: Date.now(),
 		});

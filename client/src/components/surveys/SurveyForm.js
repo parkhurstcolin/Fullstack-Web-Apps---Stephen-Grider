@@ -49,7 +49,7 @@ function validate(values) {
 		}
 	});
 
-	errors.recipients = validateEmails(values.recipients || "");
+	errors.to = validateEmails(values.to || "");
 	return errors;
 }
 
