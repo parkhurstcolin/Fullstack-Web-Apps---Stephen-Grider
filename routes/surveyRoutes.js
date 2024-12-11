@@ -29,13 +29,13 @@ module.exports = (app) => {
 				Survey.updateOne(
 					{
 						_id: surveyId,
-						recipients: {
+						to: {
 							$elemMatch: { email: email, responded: false },
 						},
 					},
 					{
 						$inc: { [choice]: 1 },
-						$set: { "recipients.$.responded": true },
+						$set: { "to.$.responded": true },
 					}
 				).exec();
 			})
