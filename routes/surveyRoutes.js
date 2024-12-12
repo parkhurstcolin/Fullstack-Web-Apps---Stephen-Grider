@@ -14,11 +14,12 @@ module.exports = (app) => {
 		const surveys = await Survey.find({ _user: req.user.id }).select({
 			to: false,
 		});
+
+		res.send(surveys);
 	});
 
 	app.get("/api/surveys/:surveyId/:choice", (req, res) => {
 		res.send("Thank you for your input!");
-		res.send(surveys);
 	});
 
 	app.post("/api/surveys/webhooks", (req, res) => {
